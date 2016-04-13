@@ -1,0 +1,1112 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     41878,       1104]
+NotebookOptionsPosition[     41619,       1090]
+NotebookOutlinePosition[     41977,       1106]
+CellTagsIndexPosition[     41934,       1103]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"BeginPackage", "[", "\"\<DavyFeyn`\>\"", "]"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "--"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Functions", " ", "to", " ", "perform", " ", "the", " ", "tensor", " ", 
+    "reduction"}], " ", "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "--"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"TensorStructure", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"TensorStructure", "::", "usage"}], "=", 
+      "\"\<TensorStructure[\!\(\*
+StyleBox[\"indices\",
+FontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"multiplicity\",
+FontSlant->\"Italic\"]\)] takes a set of indices \\\n{{\!\(\*SubscriptBox[\(j\
+\), \(1\)]\)}\[Ellipsis],{\!\(\*SubscriptBox[\(j\), \(M\)]\)}} and a list of \
+multiplicities {\[Lambda],\!\(\*SubscriptBox[\(\[Kappa]\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(\[Kappa]\), \(N\)]\)} such that \
+2\[Lambda]+\!\(\*SubscriptBox[\(\[Kappa]\), \
+\(1\)]\)+\[Ellipsis]+\!\(\*SubscriptBox[\(\[Kappa]\), \(N\)]\) = M and \\\n\
+constructs a tensor structure with \[Eta] figuring \[Lambda] times, \
+\!\(\*SubscriptBox[\(q\), \(1\)]\), \!\(\*SubscriptBox[\(\[Kappa]\), \(1\)]\) \
+times, \!\(\*SubscriptBox[\(q\), \(2\)]\), \!\(\*SubscriptBox[\(\[Kappa]\), \
+\(2\)]\) times and \\\nso on. This function is an essential piece of the \
+function SymmetricTensorStructure.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SymmetricTensorStructure", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"SymmetricTensorStructure", "::", "usage"}], "=", 
+      "\"\<SymmetricTensorStructure[multiplicity] takes a list \\\nof \
+multiplicities {\[Lambda],\!\(\*SubscriptBox[\(\[Kappa]\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(\[Kappa]\), \(N\)]\)} and constructs a \
+completly symmetric tensor structure \\\nwith \[Eta] figuring \[Lambda] \
+times, \!\(\*SubscriptBox[\(q\), \(1\)]\), \!\(\*SubscriptBox[\(\[Kappa]\), \
+\(1\)]\) times, \!\(\*SubscriptBox[\(q\), \(2\)]\), \!\(\*SubscriptBox[\(\
+\[Kappa]\), \(2\)]\) times and so on.\>\""}]}], "\n", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"TensorReduction", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"TensorReduction", "::", "usage"}], "=", 
+      "\"\<TensorRection[N,M] takes two numbers N and M and give the \\\n\
+tensor reduction of a Feynman integral with M momenta in the numerator and N \
+propagators \\\nwith power 1 in terms of scalar integrals using Davydychev's \
+formula \\\n(see Phys. Lett. B263 (1991) 107\[Dash]111).\>\""}]}], "\n", 
+    "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ToContract", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ToContract", "::", "usage"}], "=", 
+      "\"\<ToContract[N, x] takes a number N that represents the number of \\\
+\npropagators in the corresponding Feynman integral and a tensor structure x \
+that ONLY \\\ncontains terms of the form \
+p\[CenterDot]\!\(\*SubscriptBox[\(q\), \(i\)]\), \
+p\[CenterDot]\!\(\*SubscriptBox[\(n\), \(i\)]\), p\[CenterDot]p or \
+\!\(\*SuperscriptBox[\(p\), \(\[Mu]\)]\)\[Epsilon][\[Ellipsis],\[Mu],\
+\[Ellipsis]] and strip of the \!\(\*SubscriptBox[\(q\), \(i\)]\)'s and \\\n\!\
+\(\*SubscriptBox[\(n\), \(i\)]\)'s in order to construct the object that will \
+be contracted with the answer of \\\nTensorReduction.\>\""}]}], "\n", "]"}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"Integrator", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"Integrator", "::", "usage"}], "=", 
+      "\"\<Integrator[N,numerator] takes a numerator of a Feynman integral \\\
+\nwith three propagators with power one and gives back the result of the \
+Feynman integral \\\nin terms of scalar integrals in various dimensions and \
+with various powers in each of \\\nthe three propagators.\>\""}]}], "\n", 
+    "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ScalarIntegral", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ScalarIntegral", "::", "usage"}], "=", 
+      "\"\<ScalarIntegral[N, DimensionOfSpacetime,{\!\(\*SubscriptBox[\(\[Nu]\
+\), \(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(\[Nu]\), \(N\)]\)}] denotes a \
+\\\nFeynman integral with no tensorial structure in the numerator, N \
+propagators each one \\\nwith its power \!\(\*SubscriptBox[\(\[Nu]\), \
+\(i\)]\).\>\""}]}], "\n", "]"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", "--"}]}]}]}]}]}]}]}]}]}]}]}], "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Functions", " ", "to", " ", "set", " ", "labels"}], " ", "*)"}], 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", "--"}]}]}]}]}]}]}]}]}]}]}]}], "*)"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetInternalMomentum", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"SetInternalMomentum", "::", "usage"}], "=", 
+      "\"\<SetInternalMomentum[internal] sets the label to be used as \\\nthe \
+integrated momentum in a 1-loop Feynman diagram. By default it is set to be \
+p.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowInternalMomentum", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ShowInternalMomentum", "::", "usage"}], "=", 
+      "\"\<ShowInternalMomentum[] displays the current label for the \\\n\
+momentum being integrated.\>\""}]}], "\t", "\n", "]"}], ";"}], "\n", 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetAuxiliaryExternalMomenta", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"SetAuxiliaryExternalMomenta", "::", "usage"}], "=", 
+      "\"\<SetAuxiliaryExternalMomenta[external] sets the label \\\nto be \
+used to denote external momenta in a Feynman diagram. By default it is set to \
+be q. \\\nAs a matter of fact, the q's do not represent the external momenta \
+themselves but the \\\ndifference of adjacent external momenta.\>\""}]}], 
+    "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowAuxiliaryExternalMomenta", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"ShowAuxiliaryExternalMomenta", "::", "usage"}], "=", 
+      "\"\<ShowAuxiliaryExternalMomenta[] displays the current \\\nlabel for \
+the external momenta.\>\""}]}], "\t", "\n", "]"}], ";"}], "\n", "\n"}], "\n", 
+
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetPhysicalExternalMomenta", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"SetPhysicalExternalMomenta", "::", "usage"}], "=", 
+      "\"\<SetPhysicalExternalMomenta[k] sets the label k to the \\\nphysical \
+external momenta. By default it is set to k.\>\""}]}], "\n", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowPhysicalExternalMomenta", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"ShowPhysicalExternalMomenta", "::", "usage"}], "=", 
+      "\"\<ShowPhysicalExternalMomenta[] prints the label of the \\\nphysical \
+momentum in use.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetPolarizationVectors", "::", "usage"}], "]"}]}], ",", "\n", 
+     
+     RowBox[{
+      RowBox[{"SetPolarizationVectors", "::", "usage"}], "=", 
+      "\"\<SetPolarizationVectors[polarization] sets the label to be \\\nused \
+for our polarization vectors, i.e. the vectors that hide the indices of the \
+Feynman \\\ndiagram. By default it is set to be n.\>\""}]}], "\n", "]"}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowPolarizationVectors", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ShowPolarizationVectors", "::", "usage"}], "=", 
+      "\"\<ShowPolarizationVectors[] displays the current label for \\\nthe \
+polarization vectors.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetMassParameter", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"SetMassParameter", "::", "usage"}], "=", 
+      "\"\<SetMassParameter[mass] sets the label to be used to denote the \\\n\
+mass parameter. By default it is set to m.\>\""}]}], "\n", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowMassParameter", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ShowMassParameter", "::", "usage"}], "=", 
+       "\"\<ShowMassParameter[] displays the current label for the mass \\\n\
+parameter.\>\""}], ";"}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ShowCurrentLabels", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ShowCurrentLabels", "::", "usage"}], "=", 
+      "\"\<ShowCurrentLabels[] displays a table with the current value of \\\n\
+the dimension of spacetime and the current labels for the internal momentum, \
+the auxiliary \\\nexternal momenta, the physical external momenta, the \
+polarization vectors and the mass \\\nparameter.\>\""}]}], "\n", "]"}], ";"}],
+   "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ToPhysicalExternalMomenta", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"ToPhysicalExternalMomenta", "::", "usage"}], "=", 
+      "\"\<ToPhysicalExternalMomenta[N] exchange the auxiliar \\\nexternal \
+momenta (denoted by default q) by the physical external momenta in a N-point \
+\\\nfunction, assuming that all vertices in the 1-loop diagram connects one \
+external leg to \\\ntwo internal one.\>\""}]}], "\n", "]"}], ";"}], "\n", 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Functions", " ", "to", " ", "evaluate", " ", "the", " ", "scalar", " ", 
+    "integrals"}], " ", "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"EvaluateScalarIntegrals", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"EvaluateScalarIntegrals", "::", "usage"}], "=", 
+      "\"\<EvaluateScalarIntegrals[N, case][expr] takes the number \\\nof \
+points of the correlations function N and an expression expr that contains \\\
+\nScalarIntegrals and evaluate them in the case requested. If no case is \
+selected the \\\nintegrals will be computed in the massless case. For 2-point \
+functions, the cases \\\navailable are OneMass and Massless, while for \
+3-point functions one can select among \\\nOneMass, Massless and \
+ZeroNormExternalMomenta.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"FullyEvaluate", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"FullyEvaluate", "::", "usage"}], "=", 
+      "\"\<FullyEvaluate[N, limit][expr] take two parameters N, the number of \
+\\\npropagators in the Feynman diagram and limit, which corresponds to the \
+assumptions that \\\nwe are using regarding the external momenta in order to \
+evaluate the momentum integrals. \\\nFullyEvaluate[N, limit] acts on expr \
+which is supposed to be the numerator of a Feynman \\\nintegral.\>\""}]}], 
+    "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"CrossDiagram", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"CrossDiagram", "::", "usage"}], "=", 
+      "\"\<CrossDiagram[i,j][diagram] takes two indices i and j substitutes \
+\\\n\!\(\*SubscriptBox[\(k\), \(i\)]\)\[LeftRightArrow]\!\(\*SubscriptBox[\(k\
+\), \(j\)]\) and \!\(\*SubscriptBox[\(n\), \
+\(i\)]\)\[LeftRightArrow]\!\(\*SubscriptBox[\(n\), \(j\)]\) in diagram to \
+produce the cross-diagram.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SimplifyExternalMomenta3pts", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"SimplifyExternalMomenta3pts", "::", "usage"}], "=", 
+      "\"\<SimplifyExternalMomenta3pts[\!\(\*FormBox[
+StyleBox[\"expr\",
+FontSlant->\"Italic\"],
+TraditionalForm]\)] exchange the factors \\\nof \
+\!\(TraditionalForm\`\*SubscriptBox[\(k\), \
+\(i\)]\[CenterDot]\*SubscriptBox[\(k\), \(j\)]\) in the 3-point function expr \
+\!\(TraditionalForm\`\*FractionBox[\(1\), \(2\)]\\\ \
+\((\*SubsuperscriptBox[\(k\), \(m\), \(2\)] - \*SubsuperscriptBox[\(k\), \
+\(i\), \(2\)] - \*SubsuperscriptBox[\(k\), \(j\), \(2\)])\)\), where m\
+\[NotEqual]i\[NotEqual]j.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"IntegralsToCompute", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"IntegralsToCompute", "::", "usage"}], "=", 
+      "\"\<IntegralsToCompute[N, case, rows][numerator] \\\ntakes the \
+numerator of a Feynman integral, the number of propagators N, \\\nthe case in \
+which the integrals should be evaluated and a number of rows \\\nand displays \
+all scalar integrals that must be evaluated. The case and the \\\nnumber of \
+rows are optional arguments set by default to \\\"Massless\\\" and 10, \\\n\
+respectively.\>\""}]}], "\t", "\n", "]"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Functions", " ", "to", " ", "deal", " ", "with", " ", "the", " ", 
+    "tensor", " ", "structures"}], " ", "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"EvenSector", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"EvenSector", "::", "usage"}], "=", 
+      "\"\<EvenSector[expr] selects the terms in expr that do not contain \\\n\
+an \[Epsilon]-symbol.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"OddSector", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"OddSector", "::", "usage"}], "=", 
+      "\"\<OddSector[expr] selects only the terms in expr that contain an \\\n\
+\[Epsilon]-symbol.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GeneralizedFrobeniousSolve", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"GeneralizedFrobeniousSolve", "::", "usage"}], "=", 
+      "\"\<\\\nGeneralizedFrobeniousSolve[{{\!\(\*SubscriptBox[\(a\), \(1, \
+1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(a\), \(N, \
+1\)]\)},\[Ellipsis],{\!\(\*SubscriptBox[\(a\), \(1, \
+M\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(a\), \(N, \
+M\)]\)}},{\!\(\*SubscriptBox[\(m\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(m\), \(N\)]\)}] generalizes the \\\n\
+function FrobeniousSolve to N-dimensional vectors.\>\""}]}], "\n", "]"}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GenerateEvenTensorStructures", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"GenerateEvenTensorStructures", "::", "usage"}], "=", 
+       "\"\<GenerateEvenTensorStructures[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)] generates \\\nall the \
+possible even tensorial structures that can be present in a N-point function \
+of \\\ntensors of rank \!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\).\>\""}], ";"}]}], 
+    "\t", "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GenerateOddTensorStructures", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"GenerateOddTensorStructures", "::", "usage"}], "=", 
+      "\"\<GenerateOddTensorStructures[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)] generates all \\\nthe \
+possible odd tensorial structures that can be present in a N-point function \
+of \\\ntensors of rank \!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\).\>\""}]}], "\t", "\n",
+     "]"}], ";"}], "\n", "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GenerateTensorStructures", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"GenerateTensorStructures", "::", "usage"}], "=", 
+      "\"\<GenerateTensorStructures[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)] generates all the \\\n\
+possible tensorial structures that can be present in a N-point function of \
+tensors of \\\nrank \!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\).\>\""}]}], "\t", "\n",
+     "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"CheckTransversality", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"CheckTransversality", "::", "usage"}], "=", 
+      "\"\<CheckTransversality[k,n][expr] exchange a polarization vector \\\n\
+n by a momentum k. This function is useful to verify Ward \
+identities.\>\""}]}], "\t", "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"CheckTracelessness", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"CheckTracelessness", "::", "usage"}], "=", 
+      "\"\<CheckTracelessness[n][expr] extract two polarization vectors \\\n\
+with the same name from expression and contract their indices. In other \
+words, it takes \\\na trace of operator associated to the polarization vector \
+n.\>\""}]}], "\t", "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GeneralEvenContactTerm", "::", "usage"}], "]"}]}], ",", "\n", 
+     
+     RowBox[{
+      RowBox[{"GeneralEvenContactTerm", "::", "usage"}], "=", 
+      "\"\<GeneralEvenContactTerm[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)] creates the most general \\\n\
+linear combination of the even tensor structures present in a correlation \
+function of N \\\noperators each being a tensor of rank \
+\!\(\*SubscriptBox[\(t\), \(i\)]\). The label of the constants is an optional \
+\\\nargument which is set by default to be \\\"a\\\". To change it to another \
+one: \\\nGeneralEvenContactTerm[\!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \
+\(N\)]\),{new_label}].\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GeneralOddContactTerm", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"GeneralOddContactTerm", "::", "usage"}], "=", 
+      "\"\<GeneralOddContactTerm[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)] creates the most general \\\n\
+linear combination of the odd tensor structures present in a correlation \
+function of N \\\noperators each being a tensor of rank \
+\!\(\*SubscriptBox[\(t\), \(i\)]\). The label of the constants is an optional \
+\\\nargument which is set by default to be \\\"a\\\". To change it to another \
+one: \\\nGeneralOddContactTerm[\!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \
+\(N\)]\),{new_label}].\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"EmphasizeTensorStructures", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"EmphasizeTensorStructures", "::", "usage"}], "=", 
+      "\"\<EmphasizeTensorStructures[terms,style][expr] takes a \\\nlist of \
+terms and an optinal set of styles and rewrite expr applying the desired \
+styles \\\nto the list of terms. By default, style = {Bold,Blue}.\>\""}]}], 
+    "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"CollectTensorStructures", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"CollectTensorStructures", "::", "usage"}], "=", 
+      "\"\<CollectTensorStructures[\!\(\*SubscriptBox[\(t\), \(1\)]\),\
+\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\)][expr] is a shortcut for \\\n\
+the operation of collecting tensor structures in a given correlation function \
+expr of \\\noperators of spin \!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\!\(\*SubscriptBox[\(t\), \
+\(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(t\), \(N\)]\).\>\""}]}], "\n", 
+    "]"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}],
+    "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Transverse", "-", 
+    RowBox[{"traceless", " ", "tensor", " ", "structures"}]}], " ", "*)"}], 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", "-"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}],
+    "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"TransverseProjector", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"TransverseProjector", "::", "usage"}], "=", 
+      "\"\<TransverseProjector[k,\!\(\*SubscriptBox[\(n\), \
+\(1\)]\),\!\(\*SubscriptBox[\(n\), \(2\)]\)] implements the projector over \\\
+\nthe hyperplane transverse to the vector k. \!\(\*SubscriptBox[\(n\), \(1\)]\
+\) and \!\(\*SubscriptBox[\(n\), \(2\)]\) denote the polarization vectors \\\n\
+contracted to the indices of the projector. TransverseProjector[k,{\[Mu]},{\
+\[Nu]}] represents \\\nthe projector without the contraction with \
+polatization vectors.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ExplicitTransverseProjector", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"ExplicitTransverseProjector", "::", "usage"}], "=", 
+      "\"\<ExplicitTransverseProjector[expr] applies a \\\nsubstitution rule \
+on expr which exchanges all projectors by their explicit expression.\>\""}]}],
+     "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"GenerateTransverseTensorStructures", "::", "usage"}], "]"}]}],
+      ",", "\n", 
+     RowBox[{
+      RowBox[{"GenerateTransverseTensorStructures", "::", "usage"}], "=", 
+      "\"\<GenerateTransverseTensorStructures[s] \\\ngenerates all transverse \
+tensor structures that may be present in a 2-point function \\\nof tensor of \
+rank s.\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{
+       "GenerateEvenTracelessTransverseTensorStructure", "::", "usage"}], 
+       "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+      "GenerateEvenTracelessTransverseTensorStructure", "::", "usage"}], "=", 
+      "\"\<\\\nGenerateEvenTracelessTransverseTensorStructure[spin] generate \
+the even traceless and \\\ntransverse tensor structure present in a 2-point \
+function of traceless and conserved \\\nspin s current.\>\""}]}], "\n", "]"}],
+    ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{
+       "GenerateOddTracelessTransverseTensorStructure", "::", "usage"}], 
+       "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+      "GenerateOddTracelessTransverseTensorStructure", "::", "usage"}], "=", 
+      "\"\<\\\nGenerateOddTracelessTransverseTensorStructure[spin] generate \
+the odd traceless and \\\ntransverse tensor structure present in a 2-point \
+function of traceless and conserved \\\nspin s current\>\""}]}], "\n", "]"}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"WithTransverseProjectors", "::", "usage"}], "]"}]}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"WithTransverseProjectors", "::", "usage"}], "=", 
+      "\"\<WithTransverseProjectors[spin][expr] takes expr which \\\nis \
+expected to be a 2-point function of conserved currents and write the tensor \
+\\\nstructures in terms of projector.\>\""}]}], "\n", "]"}], ";"}], "\n", 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", "--"}]}]}]}]}]}]}]}]}]}]}]}], "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Expand", " ", "around", " ", "UV", " ", "and", " ", "IR"}], " ", 
+   "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", "--"}]}]}]}]}]}]}]}]}]}]}]}], "*)"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ExpandAroundIR", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ExpandAroundIR", "::", "usage"}], "=", 
+      "\"\<ExpandAroundIR[\!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\!\(\*SubscriptBox[\(t\), \(2\)]\),order][expr] expands a 2-point \
+function of \\\noperators of spin \!\(\*SubscriptBox[\(t\), \(1\)]\) and \!\(\
+\*SubscriptBox[\(t\), \(2\)]\) around the IR (i.e. k/m ~ 0) until the \
+specified order. \\\nBe aware that this function uses PowerExpand.\>\""}]}], 
+    "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"ExpandAroundUV", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"ExpandAroundUV", "::", "usage"}], "=", 
+      "\"\<ExpandAroundUV[\!\(\*SubscriptBox[\(t\), \
+\(1\)]\),\!\(\*SubscriptBox[\(t\), \(2\)]\),order][expr] expands a 2-point \
+function of \\\noperators of spin \!\(\*SubscriptBox[\(t\), \(1\)]\) and \!\(\
+\*SubscriptBox[\(t\), \(2\)]\) around the UV (i.e. m/k~0) until the specified \
+order. \\\nBe aware that this function uses PowerExpand and assumes that the \
+parameter m/k is \\\npositive.\>\""}]}], "\n", "]"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "--"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Functions", " ", "to", " ", "deal", " ", "with", " ", "triple"}],
+     "-", 
+    RowBox[{"K", " ", "integrals"}]}], " ", "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{"--", 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"--", 
+                  RowBox[{"--", 
+                   RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{"--", 
+                    RowBox[{
+                    "--", "--"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+   "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetRegulatorsTripleK", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"SetRegulatorsTripleK", "::", "usage"}], "=", 
+      "\"\<SetRegulatorsTripleK[\[CurlyEpsilon],u,v] defines the labels for \
+the \\\nregulators needed to regulate a triple-K integral, namely \
+\!\(\*SubscriptBox[\(\[ScriptCapitalI]\), \(\[Alpha] + u\[CurlyEpsilon], \
+{\*SubscriptBox[\(\[Beta]\), \(1\)] + v\[CurlyEpsilon], \*SubscriptBox[\(\
+\[Beta]\), \(2\)] + v\[CurlyEpsilon], \*SubscriptBox[\(\[Beta]\), \(3\)] + v\
+\[CurlyEpsilon]}\)]\).\>\""}]}], "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SetRegularizationScheme", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"SetRegularizationScheme", "::", "usage"}], "=", 
+      "\"\<SetRegularizationScheme[u,v] defines which values we \\\nwant to \
+use for the regulators u and v. By default, we use u=1 and v=0.\>\""}]}], 
+    "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"BesselQuick", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"BesselQuick", "::", "usage"}], "=", 
+      "\"\<BesselQuick[\[Nu],x] computes the modified bessel function of \
+second \\\nkind \!\(\*SubscriptBox[\(K\), \(\[Nu]\)]\)(x) for \
+\[Nu]=\!\(\*FractionBox[\(1\), \(2\)]\)+n, \
+n\[Element]\[DoubleStruckCapitalZ].\>\""}]}], "\n", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"TripleK", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"TripleK", "::", "usage"}], "=", 
+       "\"\<TripleK[\[Alpha],{\!\(\*SubscriptBox[\(\[Beta]\), \
+\(1\)]\),\!\(\*SubscriptBox[\(\[Beta]\), \
+\(2\)]\),\!\(\*SubscriptBox[\(\[Beta]\), \(3\)]\)}] implements the triple-K \
+integrals as presented in \\\narXiv:1511.02357, for instance.\>\""}], ";"}]}],
+     "\n", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"ValueQ", "[", 
+       RowBox[{"SingularityTest", "::", "usage"}], "]"}]}], ",", "\n", 
+     RowBox[{
+      RowBox[{"SingularityTest", "::", "usage"}], "=", 
+      "\"\<SingularityTest[\[Alpha],{\!\(\*SubscriptBox[\(\[Beta]\), \
+\(1\)]\),\!\(\*SubscriptBox[\(\[Beta]\), \
+\(2\)]\),\!\(\*SubscriptBox[\(\[Beta]\), \(3\)]\)}] checks whether the \
+triple-K integral \\\n\!\(\*SubscriptBox[\(\[ScriptCapitalI]\), \(\[Alpha], {\
+\*SubscriptBox[\(\[Beta]\), \(1\)], \*SubscriptBox[\(\[Beta]\), \(2\)], \
+\*SubscriptBox[\(\[Beta]\), \(3\)]}\)]\) converges. In case it doesn't, it \
+tells if it is possible to define the integral \\\nvia analytic continuation \
+or if we have singularities. We have singularities when \\\n\[Alpha]+1\
+\[PlusMinus]\!\(\*SubscriptBox[\(\[Beta]\), \
+\(1\)]\)\[PlusMinus]\!\(\*SubscriptBox[\(\[Beta]\), \
+\(2\)]\)\[PlusMinus]\!\(\*SubscriptBox[\(\[Beta]\), \(3\)]\)=-2k, \
+k\[Element]{0,1,2,...}. Each singularity is classified by the signs that \
+generate \\\nit and by its value of k.\>\""}]}], "\n", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{"EndPackage", "[", "]"}]}], "Code",
+ CellChangeTimes->{{3.669351964373418*^9, 3.669352162291772*^9}, {
+   3.6693521962987967`*^9, 3.669352316592518*^9}, {3.6693524814435587`*^9, 
+   3.669352526666347*^9}, {3.6693531444917994`*^9, 3.6693532323966913`*^9}, {
+   3.669353274265834*^9, 3.669353363704957*^9}, {3.669353468440387*^9, 
+   3.669353478191057*^9}, {3.669353532865011*^9, 3.6693536938887587`*^9}, {
+   3.669353754303329*^9, 3.669353835482998*^9}, {3.6693538844995728`*^9, 
+   3.669353887236*^9}, {3.669353933204071*^9, 3.669353945948656*^9}, {
+   3.669354068975709*^9, 3.669354108892069*^9}, {3.669354142994972*^9, 
+   3.6693541669086723`*^9}, {3.66935488182628*^9, 3.669354949892158*^9}, {
+   3.669355014618*^9, 3.669355020010051*^9}, {3.6693550698078737`*^9, 
+   3.669355078060644*^9}, {3.6693566014686203`*^9, 3.669356747405472*^9}, {
+   3.6693569699680367`*^9, 3.669357070660924*^9}, {3.6693573507022657`*^9, 
+   3.669357396552816*^9}, {3.6693576632543173`*^9, 3.669357667383814*^9}, {
+   3.669357784872402*^9, 3.669357814081346*^9}, {3.6693580082351313`*^9, 
+   3.6693583692235537`*^9}, {3.66935841487743*^9, 3.669358580636958*^9}, {
+   3.669358615023995*^9, 3.669358741277213*^9}, {3.6693587886656446`*^9, 
+   3.669358967171156*^9}, {3.669363574354129*^9, 3.6693636460439997`*^9}, {
+   3.669363688495686*^9, 3.669363850799124*^9}, {3.669363893167364*^9, 
+   3.6693639053622103`*^9}, {3.669363937244997*^9, 3.669364017947596*^9}, {
+   3.6693640698226023`*^9, 3.6693641544325733`*^9}, {3.6693641848551397`*^9, 
+   3.669364278402321*^9}, {3.669364318371739*^9, 3.669364568175386*^9}, {
+   3.669364614285582*^9, 3.66936536546082*^9}, {3.669365613671686*^9, 
+   3.6693657490356083`*^9}, 3.669367295581765*^9, 3.669443931580118*^9, 
+   3.6694439765992813`*^9, {3.6694442545116987`*^9, 3.6694442601654043`*^9}, {
+   3.669528065568503*^9, 3.669528230689533*^9}, 3.6695284298566427`*^9, {
+   3.669529378072502*^9, 3.669529401605321*^9}}]
+},
+WindowSize->{808, 651},
+WindowMargins->{{46, Automatic}, {Automatic, 43}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 41057, 1068, 5405, "Code"]
+}
+]
+*)
+
