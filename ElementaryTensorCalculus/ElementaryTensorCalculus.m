@@ -123,6 +123,8 @@ SetDimensionOfSpacetime[D_:3] := Module[{}, DimensionOfSpacetime = D];
 ShowDimensionOfSpacetime[] := Print[DimensionOfSpacetime];
 
 
+(* set the number of + signs in the metric *)
+
 SetMetricSignature[p_:1] := Module[{}, MetricSignature = p];
 
 
