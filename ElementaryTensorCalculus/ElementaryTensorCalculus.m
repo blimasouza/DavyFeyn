@@ -77,7 +77,7 @@ used as arguments of the \[Epsilon]."
 ];
 
 If[!ValueQ[SchoutenIdentity::usage],
-SchoutenIdentity::usage="SchoutenIdentity[sc[A,B]\[Epsilon][C,D,\[Ellipsis]]][expr] replace all instances of \
+SchoutenIdentity::usage="SchoutenIdentity[{A,B,C,D,\[Ellipsis]}][expr] replace all instances of \
 the term sc[A,B]\[Epsilon][C,D,\[Ellipsis]] in expr using the Schouten identity."
 ];
 
@@ -261,7 +261,7 @@ If[OptionValue[ChainRule],
 (*Schouten identity*)
 
 
-SchoutenIdentity[x_][expr_]:=
+(*SchoutenIdentity[x_][expr_]:=
 Module[{scTerm,epsilonTerm,border1,border2,possibleTerms,replacement},
 	(* take the arguments inside sc *)
 	scTerm=List@@Select[x,Head[#]==sc&];
@@ -288,7 +288,37 @@ Module[{scTerm,epsilonTerm,border1,border2,possibleTerms,replacement},
 
 	(* return the given expr after use of the Schouten identity *)
 	expr//.x->replacement
-]
+]*)
+
+
+SchoutenIdentity[x_][expr_]:=
+Module[{scTerm,epsilonTerm,border1,border2,possibleTerms,replacement},
+	(* take the arguments inside sc *)
+	scTerm = x[[1;;2]];
+	
+	(* take the arguments inside \[Epsilon] *)
+	epsilonTerm = x[[3;;Length[x]]];
+	
+	(* treat the left border of the list of terms in the answer *)
+	border1={{{scTerm[[1]],epsilonTerm[[1]]},Flatten@Join[{scTerm[[2]]},epsilonTerm[[2;;Length[epsilonTerm]]]]}};
+
+	(* treat the right border of the list of terms in the answer *)
+	border2={{{scTerm[[1]],epsilonTerm[[Length[epsilonTerm]]]},Flatten@Join[epsilonTerm[[1;;Length[epsilonTerm]-1]],{scTerm[[2]]}]}};
+
+	(* all terms in the Schouten identity *)
+	possibleTerms=
+	Join[
+		border1,
+		Table[{{scTerm[[1]],epsilonTerm[[i]]},Flatten@Join[epsilonTerm[[1;;i-1]],{scTerm[[2]]},epsilonTerm[[i+1;;Length[epsilonTerm]]]]},{i,2,Length[epsilonTerm]-1}],
+		border2
+	];
+	
+	(* from list of possible terms to actual formula *)
+	replacement=Total[Map[sc@@#[[1]]\[Epsilon]@@#[[2]]&,possibleTerms]];
+	
+	(* return the given expr after use of the Schouten identity *)
+	expr//.(sc[x[[1]],x[[2]]]\[Epsilon]@@(Flatten[x[[3;;Length[x]]]])) -> replacement
+];
 
 
 (* ::Subsection:: *)
