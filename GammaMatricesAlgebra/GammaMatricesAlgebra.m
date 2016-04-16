@@ -30,6 +30,11 @@ Slashed::usage="Slashed[p,a] denotes a vector \!\(\*SuperscriptBox[\(p\), \(a\)]
 a gamma matrix \!\(\*SubscriptBox[\(\[Gamma]\), \(a\)]\)."
 ];
 
+If[!ValueQ[SetGammaMatricesRepresentation::usage],
+SetGammaMatricesRepresentation::usage="SetGammaMatricesRepresentation[x] sets the sign of the \
+trace of D gamma matrices in D dimensions, for odd D."
+];
+
 
 Begin["`Private`"]
 
@@ -41,14 +46,12 @@ DIM := ElementaryTensorCalculus`Private`DimensionOfSpacetime;
 
 (* set the metric signature to be the one defined in ElementaryTensorCalculus *)
 
-SIGN=ElementaryTensorCalculus`Private`MetricSignature;
+SIGN = ElementaryTensorCalculus`Private`MetricSignature;
 
 
-If[!ValueQ[SetGammaMatricesRepresentation::usage],
-SetGammaMatricesRepresentation::usage="SetGammaMatricesRepresentation[x] sets the sign of the \
-trace of D gamma matrices in D dimensions, for odd D."
-];
-SetGammaMatricesRepresentation[x_:1] := Module[{}, phase = x];
+(* defines the sign in the trace of D gamma matrices in D dimensions *)
+
+SetGammaMatricesRepresentation[x_:1] := Module[{}, PHASE = x];
 
 (* set it to the default value *)
 
@@ -93,11 +96,13 @@ Module[{n,L,r},
 
 ClearAll[CenterDot]
 rules={
-CenterDot[y___,a_+b_,x___] :> CenterDot[y,a,x] + CenterDot[y,b,x],
-CenterDot[y___,a_*b_,x___] /; FreeQ[a,\[Gamma]|CenterDot] :> a*CenterDot[y,b,x],
-CenterDot[a___,SubStar[\[Gamma]],\[Gamma][b__],c___] :> (-1)^Length[{b}] CenterDot[a,\[Gamma][b],SubStar[\[Gamma]],c],
-CenterDot[\[Gamma][\[Mu]__],\[Gamma][\[Nu]_],x___] :> Total[CenterDot[#,x]&/@join[\[Gamma][\[Mu]],\[Gamma][\[Nu]]]],
-CenterDot[y___,a_,x___]/;FreeQ[a,\[Gamma]|CenterDot] :> a*CenterDot[y,x]};
+	CenterDot[y___,a_+b_,x___] :> CenterDot[y,a,x] + CenterDot[y,b,x],
+	CenterDot[y___,a_*b_,x___] /; FreeQ[a,\[Gamma]|CenterDot] :> a*CenterDot[y,b,x],
+	CenterDot[a___,SubStar[\[Gamma]],\[Gamma][b__],c___] :> (-1)^Length[{b}] CenterDot[a,\[Gamma][b],SubStar[\[Gamma]],c],
+	CenterDot[a___,SubStar[\[Gamma]],SubStar[\[Gamma]],b___] :> CenterDot[a,b],
+	CenterDot[\[Gamma][\[Mu]__],\[Gamma][\[Nu]_],x___] :> Total[CenterDot[#,x]&/@join[\[Gamma][\[Mu]],\[Gamma][\[Nu]]]],
+	CenterDot[y___,a_,x___]/;FreeQ[a,\[Gamma]|CenterDot] :> a*CenterDot[y,x]
+};
 
 
 GammaMatrixTrace[x___]:=
@@ -115,7 +120,7 @@ Module[{r,ind},
 	r=r/.CenterDot[]:>(2^Floor[DIM/2]);
 
 	(* if DIM is odd, replace the product of DIM gamma matrices by an epsilon *)
-	r=r/.CenterDot[\[Gamma][a__]]:>(phase*I^((3DIM-1)/2-SIGN) \[Epsilon][a]2^Floor[DIM/2])/;(OddQ[DIM]&&Length[{a}]==DIM);
+	r=r/.CenterDot[\[Gamma][a__]]:>(PHASE*I^((3DIM-1)/2-SIGN) \[Epsilon][a]2^Floor[DIM/2])/;(OddQ[DIM]&&Length[{a}]==DIM);
 
 	(* if DIM is even, replace \[Gamma]* by an epsilon times the product of DIM gamma matrices *)
 	r=r/.CenterDot[\[Gamma][a__],SubStar[\[Gamma]]]:>-((-I)^(DIM/2+1)/DIM!)\[Epsilon]@@Table[Subscript[ind, i],{i,DIM}]GammaMatrixTrace[\[Gamma][a],Sequence@@(\[Gamma]/@Table[Subscript[ind, i],{i,DIM}])]//Expand;
