@@ -59,10 +59,10 @@ SetGammaMatricesRepresentation[];
 
 
 ClearAll[\[Gamma]]
-\[Gamma]/:\[Gamma][a__]:=Signature[{a}]\[Gamma]@@Sort[{a}]/;!OrderedQ[{a}];
-\[Gamma]/:\[Gamma][a__]:=0/;Signature[{a}]==0;
-\[Gamma]/:\[Gamma][a__]:=0/;Length[{a}]>DIM;
-\[Gamma]/:\[Gamma][]:=1;
+\[Gamma] /: \[Gamma][a__] := Signature[{a}]\[Gamma]@@Sort[{a}] /; !OrderedQ[{a}];
+\[Gamma] /: \[Gamma][a__] := 0 /; Signature[{a}] == 0;
+\[Gamma] /: \[Gamma][a__] := 0 /; Length[{a}]>DIM;
+\[Gamma] /: \[Gamma][] := 1;
 
 
 checklist[L_List]:=L
@@ -94,7 +94,6 @@ Module[{n,L,r},
 ]
 
 
-ClearAll[CenterDot]
 rules={
 	CenterDot[y___,a_+b_,x___] :> CenterDot[y,a,x] + CenterDot[y,b,x],
 	CenterDot[y___,a_*b_,x___] /; FreeQ[a,\[Gamma]|CenterDot] :> a*CenterDot[y,b,x],
@@ -109,21 +108,21 @@ GammaMatrixTrace[x___]:=
 Module[{r,ind},
 
 	(* apply the Clifford algebra repeatedly *)
-	r=x//.rules//Expand;
+	r=Flatten[x]//.rules//Expand;
 
 	(* throw to zero all the terms that do not contribute to the trace *)
-	r=r/.CenterDot[\[Gamma][a__]]:>0/;((OddQ[DIM]&&1<=Length[{a}]<DIM)||(EvenQ[DIM]&&1<=Length[{a}]<=DIM));
-	r=r/.CenterDot[SubStar[\[Gamma]]]->0;
-	r=r/.CenterDot[\[Gamma][a__],SubStar[\[Gamma]]]:>0/;Length[{a}]<DIM;
+	r=r/.CenterDot[\[Gamma][a__]] :> 0/;((OddQ[DIM]&&1<=Length[{a}]<DIM)||(EvenQ[DIM]&&1<=Length[{a}]<=DIM));
+	r=r/.CenterDot[SubStar[\[Gamma]]] -> 0;
+	r=r/.CenterDot[\[Gamma][a__],SubStar[\[Gamma]]] :> 0/;Length[{a}]<DIM;
 
 	(* CenterDot[] is the identity inside of the trace *)
-	r=r/.CenterDot[]:>(2^Floor[DIM/2]);
-
+	r=r/.CenterDot[] :> (2^Floor[DIM/2]);
+	
 	(* if DIM is odd, replace the product of DIM gamma matrices by an epsilon *)
-	r=r/.CenterDot[\[Gamma][a__]]:>(PHASE*I^((3DIM-1)/2-SIGN) \[Epsilon][a]2^Floor[DIM/2])/;(OddQ[DIM]&&Length[{a}]==DIM);
+	r=r/.CenterDot[\[Gamma][a__]] :> (PHASE*I^((3DIM-1)/2-SIGN) \[Epsilon][a]2^Floor[DIM/2])/;(OddQ[DIM]&&Length[{a}]==DIM);	
 
 	(* if DIM is even, replace \[Gamma]* by an epsilon times the product of DIM gamma matrices *)
-	r=r/.CenterDot[\[Gamma][a__],SubStar[\[Gamma]]]:>-((-I)^(DIM/2+1)/DIM!)\[Epsilon]@@Table[Subscript[ind, i],{i,DIM}]GammaMatrixTrace[\[Gamma][a],Sequence@@(\[Gamma]/@Table[Subscript[ind, i],{i,DIM}])]//Expand;
+	r=r/.CenterDot[\[Gamma][a__],SubStar[\[Gamma]]] :> ((-I)^(DIM/2+1)/DIM!)\[Epsilon]@@Table[Subscript[ind, i],{i,DIM}]GammaMatrixTrace[CenterDot@@Join[{\[Gamma][a]},\[Gamma]/@Table[Subscript[ind, i],{i,DIM}]]]//Expand;
 
 	(* return the result *)
 	r
