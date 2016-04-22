@@ -141,6 +141,11 @@ function, assuming that all vertices in the 1-loop diagram connects one external
 two internal one."
 ];
 
+If[!ValueQ[SetRenormalizationScale::usage],
+SetRenormalizationScale::usage="SetRenormalizationScale[label] sets the label of the \
+renormalization scale. By default it is called \[Mu]."
+];
+
 (*---------------------------------------------*)
 (* Functions to evaluate the scalar integrals *)
 (*---------------------------------------------*)
@@ -183,6 +188,17 @@ the case in which the integrals should be evaluated and a number of rows \
 and displays all scalar integrals that must be evaluated. The case and the \
 number of rows are optional arguments set by default to \"Massless\" and 10, \
 respectively."	
+];
+
+If[!ValueQ[WithTripleKRepresentation::usage],
+WithTripleKRepresentation::usage="WithTripleKRepresentation[numerator] takes the numerator \
+of a massless Feynman integral with three propagators and express the result in terms of \
+Triple-K integrals."
+];
+
+If[!ValueQ[EvaluateDivergentPart::usage],
+EvaluateDivergentPart::usage="EvaluateDivergentPart[numerator] takes the numerator \
+of a 3-point function in the massless case and evaluate all the divergent terms."
 ];
 
 (*-----------------------------------------------*)

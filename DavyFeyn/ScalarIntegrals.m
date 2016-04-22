@@ -126,6 +126,102 @@ Module[{locexpr},
 ];
 
 
+SetRenormalizationScale[label_:Global`\[Mu]] := Module[{}, \[Mu] = label];
+SetRenormalizationScale[];
+
+
+localDivergencies = TripleK[\[Alpha]_,{\[Beta]1_,\[Beta]2_,\[Beta]3_}][p__] :>
+Module[{n0, n1, n2, beta = {\[Beta]1,\[Beta]2,\[Beta]3}, mmmSingularity, mmpSingularity},
+	n0 = 1/2 (Total[beta]-\[Alpha]-1);
+	
+	n1 = 1/2 (Total[beta]-2Last[beta]-\[Alpha]-1);
+
+	n2 = 1/2 (2First[beta]-Total[beta]-\[Alpha]-1);
+
+	mmmSingularity[nn_] := Simplify[Total[(\!\(
+\*SubsuperscriptBox[\(\[Product]\), \(i = 1\), \(3\)]\(
+\*FractionBox[
+SuperscriptBox[\((\(-1\))\), \(#[\([i]\)]\)], \(
+\*SuperscriptBox[\(2\), \(\(-beta[\([i]\)]\) + v\ \[CurlyEpsilon] + 2  #[\([i]\)] + 1\)] \(#[\([i]\)]!\)\)] Gamma[\(-#[\([i]\)]\) + beta[\([i]\)] + v\ \[CurlyEpsilon]] 
+\*SubsuperscriptBox[\(k\), \(i\), \(2  #[\([i]\)]\)]\)\))&/@FrobeniusSolve[{1,1,1},nn]]];
+
+	mmpSingularity[nn_] := Simplify[(Total[(Product[(-1)^#[[i]]/(2^(-beta[[i]]+v \[CurlyEpsilon]+2#[[i]]+1) #[[i]]!) Gamma[-#[[i]]+beta[[i]]+v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(i\), \(2  #\[LeftDoubleBracket]i\[RightDoubleBracket]\)]\),{i,{1,2}}])((-1)^#[[3]]/(2^(beta[[3]]+v \[CurlyEpsilon]+2#[[3]]+1) #[[3]]!) Gamma[-#[[3]]-beta[[3]]-v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(3\), \(2  beta[\([3]\)] + 2  v\ \[CurlyEpsilon] + 2  #\[LeftDoubleBracket]3\[RightDoubleBracket]\)]\))&/@FrobeniusSolve[{1,1,1},nn]]+Total[(Product[(-1)^#[[i]]/(2^(-beta[[i]]+v \[CurlyEpsilon]+2#[[i]]+1) #[[i]]!) Gamma[-#[[i]]+beta[[i]]+v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(i\), \(2  #\[LeftDoubleBracket]i\[RightDoubleBracket]\)]\),{i,{2,3}}])((-1)^#[[1]]/(2^(beta[[1]]+v \[CurlyEpsilon]+2#[[1]]+1) #[[1]]!) Gamma[-#[[1]]-beta[[1]]-v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(1\), \(2  beta\[LeftDoubleBracket]1\[RightDoubleBracket] + 2  v\ \[CurlyEpsilon] + 2  #\[LeftDoubleBracket]1\[RightDoubleBracket]\)]\))&/@FrobeniusSolve[{1,1,1},nn]]+Total[(Product[(-1)^#[[i]]/(2^(-beta[[i]]+v \[CurlyEpsilon]+2#[[i]]+1) #[[i]]!) Gamma[-#[[i]]+beta[[i]]+v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(i\), \(2  #\[LeftDoubleBracket]i\[RightDoubleBracket]\)]\),{i,{1,3}}])((-1)^#[[2]]/(2^(beta[[2]]+v \[CurlyEpsilon]+2#[[2]]+1) #[[2]]!) Gamma[-#[[2]]-beta[[2]]-v \[CurlyEpsilon]]
+
+
+
+\!\(\*SubsuperscriptBox[\(k\), \(2\), \(2  beta\[LeftDoubleBracket]2\[RightDoubleBracket] + 2  v\ \[CurlyEpsilon] + 2  #\[LeftDoubleBracket]2\[RightDoubleBracket]\)]\))&/@FrobeniusSolve[{1,1,1},nn]])];
+
+	If[n0<0\[Or]n2>=0,0,
+		If[n1<0\[And]IntegerQ[n1],
+			mmmSingularity[n0] \[Mu]^(-(u-3v)\[CurlyEpsilon])/((u-3v)\[CurlyEpsilon]),
+
+			mmmSingularity[n0] \[Mu]^(-(u-3v)\[CurlyEpsilon])/((u-3v)\[CurlyEpsilon])+mmpSingularity[n1] \[Mu]^(-(u-v)\[CurlyEpsilon])/((u-v)\[CurlyEpsilon])
+		]
+	]
+];
+
+
+EvaluateDivergentPart[numerator_] := 
+Module[{res},
+	res = Collect[Integrator[3,numerator],ScalarIntegral];
+	res = res/.ScalarIntegral[3,d_,\[Nu]_List]:>
+		Module[{regdim,regnu,signatureDependent},
+			regdim = d + 2 u \[CurlyEpsilon];
+			regnu = \[Nu] + (u-v)/2 \[CurlyEpsilon];
+			signatureDependent = If[(SIGN == 1)\[Or](SIGN == DIM - 1),I^(1-regdim),1];
+			signatureDependent 2^(-regdim/2+4)/((4\[Pi])^(regdim/2) (\!\(
+\*SubsuperscriptBox[\(\[Product]\), \(j = 1\), \(3\)]\(Gamma[regnu[\([j]\)]]\)\))Gamma[regdim-Total[regnu]])TripleK[d/2-1,Table[d/2-Total[\[Nu]]+\[Nu][[i]],{i,3}]][Subscript[k, 3],Subscript[k, 1],Subscript[k, 2]]
+		];
+	res = res//ToPhysicalExternalMomenta[3];
+	res = res/.TripleK[\[Alpha]_,{\[Beta]1_,\[Beta]2_,\[Beta]3_}][p__] :> (TripleK[\[Alpha],Sort[{\[Beta]1,\[Beta]2,\[Beta]3}]]@@Permute[{p},FindPermutation[{\[Beta]1,\[Beta]2,\[Beta]3},Sort[{\[Beta]1,\[Beta]2,\[Beta]3}]]]);
+	res = res/.TripleK[\[Alpha]_,{\[Beta]1_,\[Beta]2_,\[Beta]3_}][p__]/;\[Beta]1<0 :> First[{p}]^(-2 \[Beta]1) TripleK[\[Alpha],{-\[Beta]1,\[Beta]2,\[Beta]3}][p];
+	(*res = res/.TripleK[\[Alpha]_,\[Beta]_][p__] :> (TripleK[\[Alpha],Sort[\[Beta]]]@@Permute[{p},FindPermutation[\[Beta],Sort[\[Beta]]]]);
+	res = res/.TripleK[\[Alpha]_,\[Beta]_][p__]/;First[\[Beta]]<0 :> First[{p}]^(-2First[\[Beta]]) TripleK[\[Alpha],{-1,1,1}\[Beta]][p];*)
+	res = Collect[res,TripleK];
+	res/.localDivergencies
+];
+
+
+WithTripleKRepresentation[numerator_] :=
+Module[{res},
+	res = Collect[Integrator[3,numerator],ScalarIntegral];
+	res = res/.ScalarIntegral[3,d_,\[Nu]_List]:>
+		Module[{regdim,regnu,signatureDependent},
+			regdim = d + 2 u \[CurlyEpsilon];
+			regnu = \[Nu] + (u-v)/2 \[CurlyEpsilon];
+			signatureDependent = If[(SIGN == 1)\[Or](SIGN == DIM - 1),I^(1-regdim),1];
+			signatureDependent 2^(-regdim/2+4)/((4\[Pi])^(regdim/2) (\!\(
+\*SubsuperscriptBox[\(\[Product]\), \(j = 1\), \(3\)]\(Gamma[regnu[\([j]\)]]\)\))Gamma[regdim-Total[regnu]])TripleK[d/2-1,Table[d/2-Total[\[Nu]]+\[Nu][[i]],{i,3}]][Subscript[k, 3],Subscript[k, 1],Subscript[k, 2]]
+		];
+	res = res//ToPhysicalExternalMomenta[3];
+	res = res/.TripleK[\[Alpha]_,{\[Beta]1_,\[Beta]2_,\[Beta]3_}][p__] :> (TripleK[\[Alpha],Sort[{\[Beta]1,\[Beta]2,\[Beta]3}]]@@Permute[{p},FindPermutation[{\[Beta]1,\[Beta]2,\[Beta]3},Sort[{\[Beta]1,\[Beta]2,\[Beta]3}]]]);
+	res = res/.TripleK[\[Alpha]_,{\[Beta]1_,\[Beta]2_,\[Beta]3_}][p__]/;\[Beta]1<0 :> First[{p}]^(-2 \[Beta]1) TripleK[\[Alpha],{-\[Beta]1,\[Beta]2,\[Beta]3}][p];
+	(*res = res/.TripleK[\[Alpha]_,\[Beta]_][p__] :> (TripleK[\[Alpha],Sort[\[Beta]]]@@Permute[{p},FindPermutation[\[Beta],Sort[\[Beta]]]]);
+	res = res/.TripleK[\[Alpha]_,\[Beta]_][p__]/;First[\[Beta]]<0 :> First[{p}]^(-2First[\[Beta]]) TripleK[\[Alpha],{-1,1,1}\[Beta]][p];*)
+	res = Collect[res,TripleK]
+];
+
+
 End[]
 
 
