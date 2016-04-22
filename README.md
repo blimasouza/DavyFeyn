@@ -15,7 +15,7 @@ Is a package to compute the trace of gamma matrices in arbitrary dimensions. Thi
 
 ## DavyFeyn
 _DavyFeyn_ also depends on the notions defined in _ElementaryTensorCalculus_. The fundamental idea of the package is that, given the numerator of a Feynman integral, there is a function that returns the full result of the integral.  
-The package _GammaMatricesAlgebra_ is useful generate the numerator of Feynman integrals in the case of theories with fermions.
+The package _GammaMatricesAlgebra_ is useful to generate the numerator of Feynman integrals in the case of theories with fermions.
 
 ### Tensor reduction
 To perform the tensorial reduction of of Feynman integrals, the approach that A. I. Davydychev proposes in the paper [A Simple formula for reducing Feynman diagrams to scalar integrals](http://inspirehep.net/record/316371) is implemented.
@@ -23,10 +23,10 @@ To perform the tensorial reduction of of Feynman integrals, the approach that A.
 ### Scalar integrals
 
 #### Massive case
-The package current supports only computations of 2-point functions in the massive case with only one mass parameter.
+The package currently supports only computations of 2-point functions and with only one mass parameter.
 
 #### Massless case
-The computation of the scalar integrals that appears in 3-point functions is done by using their triple-K representation. The ideas and methods presented in [Evaluation of conformal integrals](http://inspirehep.net/record/1403571) are implemented.
+The package supports the full computations of 2- and 3- point functions. The computation of the scalar integrals that appears in 3-point functions is done by using their triple-K representation. The ideas and methods presented in [Evaluation of conformal integrals](http://inspirehep.net/record/1403571) are implemented.
 
 ## Installation
 The quickest way to start using these packages is to create a new Mathematica notebook in the same folder in which you have saved all the files of _DavyFeyn_. In this case, start your notebook with:
@@ -49,10 +49,10 @@ If you also need to compute traces of gamma matrices, you will have to load the 
 <<GammaMatricesAlgebra`
 ```
 
-Another possibility is to save _DavyFeyn_ together with your _Mathematica_ installation. To discover where you have to put the files you can run the command  
+Another possibility is to save _DavyFeyn_ together with your _Mathematica_ installation. To discover in which directory you need to save the files you can run the following command on a Mathematica notebook:
 
 ```
 $UserBaseDirectory
 ```
 
-on a Mathematica notebook. The result will be the path of your local installation. You should put the folders of _DavyFeyn_ in the folder **Applications**.
+The result will be the path of your local installation. You should put the folders of _DavyFeyn_ in the folder **Applications** located in the path that you just discovered.
