@@ -5,7 +5,7 @@
 
 
 BeginPackage["ElementaryTensorCalculus`",{"Notation`"}]
-Print["ElementaryTensorCalculus Version 1.0, 12 April 2016."];
+Print["ElementaryTensorCalculus Version 1.0, 22 April 2016."];
 
 
 Unprotect\[NonBreakingSpace]@@\[NonBreakingSpace]Names["ElementaryTensorCalculus`*"];
@@ -28,7 +28,7 @@ If[!ValueQ[\[Epsilon]::usage],
 ];
 
 If[!ValueQ[sc::usage],
-sc::usage="sc[{A},{B}] defines a notion of scalar product between two vectors and at the 1
+sc::usage="sc[{A},{B}] defines a notion of scalar product between two vectors and at the \
 same time will be used to represent vectors and the metric tensor."	
 ];
 
@@ -37,7 +37,8 @@ If[!ValueQ[\[Delta]::usage],
 ];
 
 If[!ValueQ[SetChainRule::usage],
-SetChainRule::usage="SetChainRule[boolean] sets whether \[Delta] can or cannot use the chain rule."
+SetChainRule::usage="SetChainRule[boolean] sets whether \[Delta] can or cannot use the chain rule. \
+By default the chain rule is set to True."
 ];
 
 If[!ValueQ[SetDimensionOfSpacetime::usage],
@@ -117,7 +118,7 @@ Begin["`Private`"]
 (*Set dimension*)
 
 
-SetDimensionOfSpacetime[D_:3] := Module[{}, DimensionOfSpacetime = D];
+SetDimensionOfSpacetime[D_:3] := Module[{}, DimensionOfSpacetime = D;];
 
 
 ShowDimensionOfSpacetime[] := Print[DimensionOfSpacetime];
@@ -125,7 +126,7 @@ ShowDimensionOfSpacetime[] := Print[DimensionOfSpacetime];
 
 (* set the number of + signs in the metric *)
 
-SetMetricSignature[p_:1] := Module[{}, MetricSignature = p];
+SetMetricSignature[p_:1] := Module[{}, MetricSignature = p;];
 
 
 ShowMetricSignature[] := Table["+",{i,MetricSignature}]~Join~Table["-",{i,DimensionOfSpacetime - MetricSignature}];
@@ -232,22 +233,22 @@ sc/:sc[p_,{mu_}]^n_:=sc[p,p]^((n-1)/2) sc[p,{mu}]/;OddQ[n];
 ListOfConstants={}; 
 
 
-AddConstantToList[a_] := (ListOfConstants = Union[ListOfConstants~Join~{a}])
+AddConstantToList[a_] := (ListOfConstants = Union[ListOfConstants~Join~{a}];);
 
 
-ShowConstantsFromList[] := Print[ListOfConstants]
+ShowConstantsFromList[] := Print[ListOfConstants];
 
 
 \[Delta][b_/;MemberQ[ListOfConstants,b],a_]:=0; 
 
 
-Options[\[Delta]]={ChainRule -> True}
+Options[\[Delta]]={ChainRule -> True};
 
 
-SetChainRule[bool_] := SetOptions[\[Delta], ChainRule -> bool]
+SetChainRule[bool_] := Module[{},SetOptions[\[Delta], ChainRule -> bool];];
 
 
-\[Delta][\[Epsilon][a__],sc[p_,{\[Mu]_}]]:=If[FreeQ[{a},p],0,\[Epsilon][a]/.p->\[Mu]]
+\[Delta][\[Epsilon][a__],sc[p_,{\[Mu]_}]]:=If[FreeQ[{a},p],0,\[Epsilon][a]/.p->\[Mu]];
 
 
 \[Delta][f_[a_,b___],c_, OptionsPattern[]]:=
