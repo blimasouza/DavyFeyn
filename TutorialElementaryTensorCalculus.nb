@@ -1,0 +1,1326 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38783,       1318]
+NotebookOptionsPosition[     30509,       1034]
+NotebookOutlinePosition[     32068,       1082]
+CellTagsIndexPosition[     31716,       1071]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Tutorial: ElementaryTensorCalculus", "Title",
+ CellChangeTimes->{{3.665835897696814*^9, 3.665835914790621*^9}, {
+  3.670302744198915*^9, 3.670302746506301*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Bruno Lima de Souza, Ph.D. @ SISSA", "Chapter",
+ CellChangeTimes->{{3.665835917978636*^9, 3.66583597808567*^9}, {
+  3.667041187163804*^9, 3.667041187480061*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Loading the package", "Section",
+ CellChangeTimes->{{3.665835984391532*^9, 3.665835992422518*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "ElementaryTensorCalculus`"}]}], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665831877152173*^9, 3.665831882961836*^9}, {
+  3.670302784797037*^9, 3.6703027992710247`*^9}}],
+
+Cell[BoxData["\<\"ElementaryTensorCalculus Version 1.0, 22 April 2016.\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.667041190336656*^9, 3.667041272926338*^9, {3.667120110809052*^9, 
+   3.667120119499422*^9}, 3.667120237688099*^9, 3.670302800436069*^9, 
+   3.670302869232579*^9, 3.670304326185541*^9, 3.670304379927608*^9, 
+   3.6703058212838984`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions and constants in the package", "Subsubsection",
+ CellChangeTimes->{{3.665836052141053*^9, 3.665836066726881*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ElementaryTensorCalculus`*"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665835534825748*^9, 3.665835539855197*^9}}],
+
+Cell[BoxData[
+ DynamicModuleBox[{Typeset`open$$ = True}, 
+  PaneSelectorBox[{False->
+   RowBox[{
+    OpenerBox[Dynamic[Typeset`open$$],
+     ImageSize->Small], 
+    StyleBox["ElementaryTensorCalculus`", "InfoHeading"]}], True->GridBox[{
+     {
+      RowBox[{
+       OpenerBox[Dynamic[Typeset`open$$],
+        ImageSize->Small], 
+       StyleBox["ElementaryTensorCalculus`", "InfoHeading"]}]},
+     {GridBox[{
+        {
+         ButtonBox["AddConstantToList",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "AddConstantToList", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["SetDimensionOfSpacetime",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "SetDimensionOfSpacetime", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["VectorInsideEpsilon",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "VectorInsideEpsilon", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"]},
+        {
+         ButtonBox["ElementaryTensorCalculus",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "ElementaryTensorCalculus", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["SetMetricSignature",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "SetMetricSignature", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["\[Delta]",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "\[Delta]", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"]},
+        {
+         ButtonBox["sc",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {"sc", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["ShowConstantsFromList",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "ShowConstantsFromList", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["\[Epsilon]",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "\[Epsilon]", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"]},
+        {
+         ButtonBox["SchoutenIdentity",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "SchoutenIdentity", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["ShowDimensionOfSpacetime",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "ShowDimensionOfSpacetime", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], ""},
+        {
+         ButtonBox["SetChainRule",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "SetChainRule", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], 
+         ButtonBox["ShowMetricSignature",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info603670313022-7727242", {
+            "ShowMetricSignature", "ElementaryTensorCalculus`"}},
+          ButtonNote->"ElementaryTensorCalculus`"], ""}
+       },
+       DefaultBaseStyle->"InfoGrid",
+       GridBoxItemSize->{"Columns" -> {{
+            Scaled[0.31666666666666665`]}}}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}]}, 
+   Dynamic[Typeset`open$$],
+   ImageSize->Automatic]]], "Print", "InfoCell",
+ CellChangeTimes->{3.670305822976635*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Metric tensor, vectors and the scalar product", "Section",
+ CellChangeTimes->{{3.665836081929163*^9, 3.66583613334025*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "sc"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836356676972*^9, 3.665836375991912*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"sc[{A},{B}] defines a notion of scalar product between two \
+vectors and at the same time will be used to represent vectors and the metric \
+tensor.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.670305840116601*^9},
+ CellTags->"Info613670313040-7727242"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Metric", "Subsection",
+ CellChangeTimes->{{3.6658363985225067`*^9, 3.665836399418508*^9}}],
+
+Cell["The metric tensor is given by", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6658361363020267`*^9, 3.6658361475483294`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sc", "[", 
+  RowBox[{
+   RowBox[{"{", "\[Mu]", "}"}], ",", 
+   RowBox[{"{", "\[Nu]", "}"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6658361487904387`*^9, 3.66583615288377*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["\[Eta]", 
+  RowBox[{"\[Mu]", ",", "\[Nu]"}]]], "Output",
+ CellChangeTimes->{3.665836153790629*^9, 3.667041281079667*^9, 
+  3.6703028848790903`*^9}]
+}, Open  ]],
+
+Cell["\<\
+To contract metric tensors we need only to have coincident indices\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836173231228*^9, 3.6658361935263443`*^9}, {
+  3.670302944339932*^9, 3.6703029514205437`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Nu]", "}"}], ",", 
+    RowBox[{"{", "\[Rho]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836195749174*^9, 3.665836206111845*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["\[Eta]", 
+  RowBox[{"\[Mu]", ",", "\[Rho]"}]]], "Output",
+ CellChangeTimes->{3.6658362069228277`*^9, 3.667041283845234*^9, 
+  3.6703029620562353`*^9}]
+}, Open  ]],
+
+Cell["\<\
+The trace of the metric tensor gives the dimension of spacetime, which is set \
+to 3 by default\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6658362235177507`*^9, 3.665836252756833*^9}, 
+   3.670302976600309*^9, {3.670303007353734*^9, 3.670303032291689*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836214832491*^9, 3.665836217514428*^9}}],
+
+Cell[BoxData["3"], "Output",
+ CellChangeTimes->{3.665836218065957*^9, 3.670302969486535*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "To change the spacetime dimension we may use the function ",
+ StyleBox["SetDimensionOfSpacetime",
+  FontFamily->"Courier",
+  FontWeight->"Bold"],
+ ":"
+}], "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836257930541*^9, 3.66583626622582*^9}, {
+  3.6703029968733587`*^9, 3.670302997299368*^9}, {3.6703030583282337`*^9, 
+  3.670303090079468*^9}, {3.6703031297276*^9, 3.670303133576659*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SetDimensionOfSpacetime"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670303138718505*^9, 3.6703031423116417`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SetDimensionOfSpacetime[D] sets to D the dimension of \
+spacetime. By default it is set to 3.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.6703031427949953`*^9},
+ CellTags->"Info243670310342-7727242"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDimensionOfSpacetime", "[", "4", "]"}], ";"}]], "Code",
+ CellChangeTimes->{{3.670303150938162*^9, 3.670303160868094*^9}}],
+
+Cell["\<\
+After changing the dimension of spacetime we may try the full contraction of \
+the metric tensor again:\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.67030378128727*^9, 3.670303814960671*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836214832491*^9, 3.665836217514428*^9}}],
+
+Cell[BoxData["4"], "Output",
+ CellChangeTimes->{3.665836218065957*^9, 3.670302969486535*^9, 
+  3.6703031716648273`*^9}]
+}, Open  ]],
+
+Cell["Notice that another possible way to contract indices is:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836289439086*^9, 3.665836299655175*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sc", "[", 
+  RowBox[{
+   RowBox[{"{", "\[Mu]", "}"}], ",", 
+   RowBox[{"{", "\[Mu]", "}"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836301396318*^9, 3.665836304846879*^9}}],
+
+Cell[BoxData["4"], "Output",
+ CellChangeTimes->{3.665836305234192*^9, 3.67030320293778*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Vector", "Subsection",
+ CellChangeTimes->{{3.6658364071686068`*^9, 3.665836408621451*^9}}],
+
+Cell["A vector is given by", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836410764387*^9, 3.665836414470641*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sc", "[", 
+  RowBox[{"v", ",", 
+   RowBox[{"{", "\[Mu]", "}"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836415587326*^9, 3.665836420890511*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["v", "\[Mu]"]], "Output",
+ CellChangeTimes->{3.66583642136611*^9}]
+}, Open  ]],
+
+Cell["\<\
+It is possible to contract this vector with the metric tensor\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836452216283*^9, 3.66583646320326*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{"v", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836464709901*^9, 3.665836474093773*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["v", "\[Nu]"]], "Output",
+ CellChangeTimes->{3.6658364750016613`*^9}]
+}, Open  ]],
+
+Cell["and it is also possible to contract is with another vector", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6658364807171497`*^9, 3.665836501034464*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{"v", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{"w", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6658365024717093`*^9, 3.665836514822515*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{"v", "\[CenterDot]", "w"}], ")"}]], "Output",
+ CellChangeTimes->{{3.6658365109596653`*^9, 3.665836515460464*^9}}]
+}, Open  ]],
+
+Cell["which is equivalent to", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836517916699*^9, 3.665836522098597*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{"v", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{"w", ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836523401881*^9, 3.6658365353250103`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{"v", "\[CenterDot]", "w"}], ")"}]], "Output",
+ CellChangeTimes->{3.665836535674665*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Scalar product", "Subsection",
+ CellChangeTimes->{{3.665836550214005*^9, 3.665836553664896*^9}}],
+
+Cell["\<\
+The contraction of two vectors gives their scalar product which could be get \
+directly from\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6658365613001003`*^9, 3.665836585865243*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sc", "[", 
+  RowBox[{"v", ",", "w"}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836586961825*^9, 3.665836588758245*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{"v", "\[CenterDot]", "w"}], ")"}]], "Output",
+ CellChangeTimes->{3.665836589200348*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Derivative of with respect to a vector", "Section",
+ CellChangeTimes->{{3.665836624824933*^9, 3.665836647606759*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "\[Delta]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836651664352*^9, 3.665836652248211*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"\[Delta][expr,x] defines a notion of derivative that can be \
+applied to our tensors.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.6703039029464703`*^9},
+ CellTags->"Info303670311102-7727242"]
+}, Open  ]],
+
+Cell["\<\
+If we have an expression f that is composed by vectors, metric tensors and \
+scalar products we can derive it with respect to a vector.\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836667422555*^9, 3.665836714684341*^9}}],
+
+Cell["A few examples will explain the possibilities:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.665836723726974*^9, 3.665836727992957*^9}, {
+  3.665836779931745*^9, 3.6658367911408863`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", "w"}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6658367294510717`*^9, 3.6658367425861387`*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["w", "\[Mu]"]], "Output",
+ CellChangeTimes->{3.665836743455402*^9, 3.670305856642476*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", "v"}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6658367664239397`*^9, 3.665836770976347*^9}}],
+
+Cell[BoxData[
+ RowBox[{"2", " ", 
+  SubscriptBox["v", "\[Mu]"]}]], "Output",
+ CellChangeTimes->{3.6658367714712954`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836750014235*^9, 3.665836753822577*^9}}],
+
+Cell[BoxData[
+ SubscriptBox["\[Eta]", 
+  RowBox[{"\[Mu]", ",", "\[Nu]"}]]], "Output",
+ CellChangeTimes->{3.665836754559662*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"w", ",", 
+     RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836750014235*^9, 3.665836753822577*^9}, {
+  3.6658368125114307`*^9, 3.6658368447002583`*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.665836754559662*^9, 3.665836813005124*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"sc", "[", 
+      RowBox[{"v", ",", 
+       RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+     RowBox[{"sc", "[", 
+      RowBox[{"v", ",", 
+       RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}], "+", 
+    RowBox[{
+     RowBox[{"sc", "[", 
+      RowBox[{"v", ",", "v"}], "]"}], 
+     RowBox[{"sc", "[", 
+      RowBox[{
+       RowBox[{"{", "\[Mu]", "}"}], ",", 
+       RowBox[{"{", "\[Nu]", "}"}]}], "]"}]}]}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"v", ",", 
+     RowBox[{"{", "\[Rho]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836750014235*^9, 3.665836753822577*^9}, {
+  3.6658368125114307`*^9, 3.665836885780963*^9}, {3.670303952829481*^9, 
+  3.670303959655388*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", 
+   SubscriptBox["v", "\[Rho]"], " ", 
+   SubscriptBox["\[Eta]", 
+    RowBox[{"\[Mu]", ",", "\[Nu]"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["v", "\[Nu]"], " ", 
+   SubscriptBox["\[Eta]", 
+    RowBox[{"\[Mu]", ",", "\[Rho]"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["v", "\[Mu]"], " ", 
+   SubscriptBox["\[Eta]", 
+    RowBox[{"\[Nu]", ",", "\[Rho]"}]]}]}]], "Output",
+ CellChangeTimes->{
+  3.665836754559662*^9, 3.665836813005124*^9, {3.665836871496894*^9, 
+   3.665836886930696*^9}, 3.6703039602949333`*^9}]
+}, Open  ]],
+
+Cell["\<\
+We may also consider derivatives of generic functions. For example:\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6658368221858177`*^9, 3.665836836885057*^9}, {
+  3.665836927096046*^9, 3.665836993329362*^9}, {3.6703055622825823`*^9, 
+  3.670305574139021*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"Sin", "[", 
+    RowBox[{"sc", "[", 
+     RowBox[{"x", ",", "x"}], "]"}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"x", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{3.670305575785078*^9}],
+
+Cell[BoxData[
+ RowBox[{"2", " ", 
+  RowBox[{"Cos", "[", 
+   RowBox[{"(", 
+    RowBox[{"x", "\[CenterDot]", "x"}], ")"}], "]"}], " ", 
+  SubscriptBox["x", "\[Mu]"]}]], "Output",
+ CellChangeTimes->{{3.670305576779934*^9, 3.6703055856365767`*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "For some applications it might me desirible to not allow the derivative to \
+apply the chain rule, in those cases we may use ",
+ StyleBox["SetChainRule",
+  FontFamily->"Courier",
+  FontWeight->"Bold"],
+ ":"
+}], "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6703055887436047`*^9, 3.670305639180344*^9}, {
+  3.670305673106656*^9, 3.670305676822463*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SetChainRule"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670304037145665*^9, 3.670304040313727*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SetChainRule[boolean] sets whether \[Delta] can or cannot use \
+the chain rule. By default the chain rule is set to True.\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.6703056795525093`*^9},
+ CellTags->"Info533670312879-7727242"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"SetChainRule", "[", "False", "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665836998518217*^9, 3.665837040608663*^9}, {
+  3.670305700327759*^9, 3.670305706600895*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"Sin", "[", 
+    RowBox[{"sc", "[", 
+     RowBox[{"x", ",", "x"}], "]"}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{"x", ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.665837042619803*^9, 3.665837051960075*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  FractionBox[
+   RowBox[{"\[Delta]", " ", 
+    RowBox[{"Sin", "[", 
+     RowBox[{"(", 
+      RowBox[{"x", "\[CenterDot]", "x"}], ")"}], "]"}]}], 
+   RowBox[{"\[Delta]", " ", 
+    SuperscriptBox["x", "\[Mu]"]}]],
+  HoldForm]], "Output",
+ CellChangeTimes->{
+  3.665837053716361*^9, {3.670304063897921*^9, 3.670304089477627*^9}, {
+   3.670304386475676*^9, 3.670304390571278*^9}, 3.670305714412773*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Levi-Civita symbol", "Section",
+ CellChangeTimes->{{3.665837173588832*^9, 3.665837180634795*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "\[Epsilon]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6703060206970263`*^9, 3.67030602186539*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"\[Epsilon][\[Mu],\[Nu],\[Rho],...] defines the totally \
+antisymmetric Levi-Civita symbol.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.670306022824383*^9},
+ CellTags->"Info663670313222-7727242"]
+}, Open  ]],
+
+Cell[TextData[{
+ "To recall in which dimension we are working we may use the function ",
+ StyleBox["ShowDimensionOfSpacetime",
+  FontFamily->"Courier",
+  FontWeight->"Bold"],
+ ":"
+}], "Text",
+ Editable->False,
+ CellChangeTimes->{{3.670305786681757*^9, 3.670305817470688*^9}, {
+  3.67030593158671*^9, 3.670305959302145*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ShowDimensionOfSpacetime"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670305968842474*^9, 3.670305970668641*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"ShowDimensionOfSpacetime[] displays the current value for the \
+dimension of spacetime.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.670305971161536*^9},
+ CellTags->"Info653670313171-7727242"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ShowDimensionOfSpacetime", "[", "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670305732052114*^9, 3.670305744910411*^9}}],
+
+Cell[BoxData["4"], "Print",
+ CellChangeTimes->{{3.670305745419219*^9, 3.670305756102859*^9}, 
+   3.670305927015382*^9}]
+}, Open  ]],
+
+Cell["The Levi-Civita symbol in 4 dimensions is:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6703061541853456`*^9, 3.670306181131459*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Epsilon]", "[", 
+  RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+  "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670306046389045*^9, 3.6703060788306913`*^9}, 
+   3.670306150973752*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[Epsilon]", "[", 
+  RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+  "]"}]], "Output",
+ CellChangeTimes->{{3.670306058296256*^9, 3.6703060792112637`*^9}, 
+   3.670306151680337*^9, 3.67030618255433*^9}]
+}, Open  ]],
+
+Cell["If the letters are not in lexicographical order:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.670306186499338*^9, 3.6703061984246693`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Epsilon]", "[", 
+  RowBox[{"\[Nu]", ",", "\[Mu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+  "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670306203858811*^9, 3.670306207083214*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  RowBox[{"\[Epsilon]", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+   "]"}]}]], "Output",
+ CellChangeTimes->{3.6703062076315823`*^9}]
+}, Open  ]],
+
+Cell["\<\
+To contract objects with the Levi-Civita symbol we simply need to repeat \
+indices:\
+\>", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6703062117392073`*^9, 3.670306232269047*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{"p", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+  RowBox[{"\[Epsilon]", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+   "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.67030623630442*^9, 3.670306247755632*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[Epsilon]", "[", 
+  RowBox[{"p", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+  "]"}]], "Output",
+ CellChangeTimes->{3.670306248214435*^9}]
+}, Open  ]],
+
+Cell["If we have a contraction of indices of the \[Epsilon] we get a zero:", \
+"Text",
+ Editable->False,
+ CellChangeTimes->{{3.67030625439439*^9, 3.6703063031473*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{
+    RowBox[{"{", "\[Mu]", "}"}], ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"\[Epsilon]", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+   "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6703063047089157`*^9, 3.6703063140432053`*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.670306314471067*^9}]
+}, Open  ]],
+
+Cell["or if we contract twice the same vector:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6703063182894707`*^9, 3.67030633127169*^9}, {
+  3.6703218109614153`*^9, 3.670321811073432*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sc", "[", 
+   RowBox[{"p", ",", 
+    RowBox[{"{", "\[Mu]", "}"}]}], "]"}], 
+  RowBox[{"sc", "[", 
+   RowBox[{"p", ",", 
+    RowBox[{"{", "\[Nu]", "}"}]}], "]"}], 
+  RowBox[{"\[Epsilon]", "[", 
+   RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Rho]", ",", "\[Sigma]"}], 
+   "]"}]}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6703063371221046`*^9, 3.6703063422099047`*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.670306342714061*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Derivative", "Subsection",
+ CellChangeTimes->{{3.670321831195696*^9, 3.6703218454336977`*^9}}],
+
+Cell["We can derive with respect to vectors:", "Text",
+ Editable->False,
+ CellChangeTimes->{{3.6703064611603394`*^9, 3.670306489500331*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[Delta]", "[", 
+  RowBox[{
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{
+     SubscriptBox["p", "1"], ",", 
+     SubscriptBox["p", "2"], ",", 
+     SubscriptBox["p", "3"], ",", 
+     SubscriptBox["p", "4"]}], "]"}], ",", 
+   RowBox[{"sc", "[", 
+    RowBox[{
+     SubscriptBox["p", "1"], ",", 
+     RowBox[{"{", "\[Mu]", "}"}]}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.6703063986388817`*^9, 3.670306448969252*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[Epsilon]", "[", 
+  RowBox[{"\[Mu]", ",", 
+   SubscriptBox["p", "2"], ",", 
+   SubscriptBox["p", "3"], ",", 
+   SubscriptBox["p", "4"]}], "]"}]], "Output",
+ CellChangeTimes->{{3.67030643839158*^9, 3.670306450213234*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Schouten identity", "Subsection",
+ CellChangeTimes->{{3.670321850283572*^9, 3.670321853944808*^9}}],
+
+Cell[TextData[{
+ "The function ",
+ StyleBox["SchoutenIdentity",
+  FontFamily->"Courier",
+  FontWeight->"Bold"],
+ " implements a replacement rule to simplify expression using the Schouten \
+identity:"
+}], "Text",
+ Editable->False,
+ CellChangeTimes->{{3.670306635563012*^9, 3.670306681340107*^9}, {
+  3.6703067119506483`*^9, 3.6703067330542507`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SchoutenIdentity"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670306596154995*^9, 3.67030661581824*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SchoutenIdentity[{A,B,C,D,\[Ellipsis]}][expr] replace all \
+instances of the term sc[A,B]\[Epsilon][C,D,\[Ellipsis]] in expr using the \
+Schouten identity.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.670306616312252*^9},
+ CellTags->"Info833670313816-7727242"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SchoutenIdentity", "[", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e", ",", "f"}], "}"}], 
+   "]"}], "[", 
+  RowBox[{
+   RowBox[{"sc", "[", 
+    RowBox[{"a", ",", "b"}], "]"}], 
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{"c", ",", "d", ",", "e", ",", "f"}], "]"}]}], "]"}]], "Code",
+ InitializationCell->False,
+ CellChangeTimes->{{3.670306524701385*^9, 3.6703065673039417`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"(", 
+     RowBox[{"a", "\[CenterDot]", "f"}], ")"}]}], " ", 
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{"b", ",", "c", ",", "d", ",", "e"}], "]"}]}], "+", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"a", "\[CenterDot]", "e"}], ")"}], " ", 
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{"b", ",", "c", ",", "d", ",", "f"}], "]"}]}], "-", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"a", "\[CenterDot]", "d"}], ")"}], " ", 
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{"b", ",", "c", ",", "e", ",", "f"}], "]"}]}], "+", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"a", "\[CenterDot]", "c"}], ")"}], " ", 
+   RowBox[{"\[Epsilon]", "[", 
+    RowBox[{"b", ",", "d", ",", "e", ",", "f"}], "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.6703065527948437`*^9, 3.670306567757852*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{808, 651},
+WindowMargins->{{68, Automatic}, {Automatic, 45}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+2016)",
+StyleDefinitions->FrontEnd`FileName[{"Article"}, "Preprint.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info613670313040-7727242"->{
+  Cell[6815, 203, 296, 5, 58, "Print",
+   CellTags->"Info613670313040-7727242"]},
+ "Info243670310342-7727242"->{
+  Cell[10005, 312, 243, 4, 40, "Print",
+   CellTags->"Info243670310342-7727242"]},
+ "Info303670311102-7727242"->{
+  Cell[15290, 509, 235, 4, 40, "Print",
+   CellTags->"Info303670311102-7727242"]},
+ "Info533670312879-7727242"->{
+  Cell[20804, 701, 274, 5, 40, "Print",
+   CellTags->"Info533670312879-7727242"]},
+ "Info663670313222-7727242"->{
+  Cell[22431, 757, 238, 4, 43, "Print",
+   CellTags->"Info663670313222-7727242"]},
+ "Info653670313171-7727242"->{
+  Cell[23195, 782, 235, 4, 40, "Print",
+   CellTags->"Info653670313171-7727242"]},
+ "Info833670313816-7727242"->{
+  Cell[28838, 980, 303, 5, 43, "Print",
+   CellTags->"Info833670313816-7727242"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info613670313040-7727242", 30927, 1047},
+ {"Info243670310342-7727242", 31040, 1050},
+ {"Info303670311102-7727242", 31154, 1053},
+ {"Info533670312879-7727242", 31268, 1056},
+ {"Info663670313222-7727242", 31382, 1059},
+ {"Info653670313171-7727242", 31496, 1062},
+ {"Info833670313816-7727242", 31610, 1065}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 166, 2, 77, "Title"],
+Cell[CellGroupData[{
+Cell[771, 28, 167, 2, 65, "Chapter"],
+Cell[CellGroupData[{
+Cell[963, 34, 104, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[1092, 39, 342, 8, 66, "Code",
+ InitializationCell->False],
+Cell[1437, 49, 347, 6, 22, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1821, 60, 129, 1, 24, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[1975, 65, 162, 3, 50, "Code",
+ InitializationCell->False],
+Cell[2140, 70, 4319, 116, 136, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6520, 193, 129, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[6674, 198, 138, 3, 49, "Code",
+ InitializationCell->False],
+Cell[6815, 203, 296, 5, 58, "Print",
+ CellTags->"Info613670313040-7727242"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7148, 213, 96, 1, 35, "Subsection"],
+Cell[7247, 216, 133, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[7405, 222, 228, 6, 49, "Code",
+ InitializationCell->False],
+Cell[7636, 230, 176, 4, 31, "Output"]
+}, Open  ]],
+Cell[7827, 237, 227, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[8079, 246, 360, 11, 49, "Code",
+ InitializationCell->False],
+Cell[8442, 259, 179, 4, 31, "Output"]
+}, Open  ]],
+Cell[8636, 266, 277, 6, 26, "Text"],
+Cell[CellGroupData[{
+Cell[8938, 276, 359, 11, 49, "Code",
+ InitializationCell->False],
+Cell[9300, 289, 92, 1, 28, "Output"]
+}, Open  ]],
+Cell[9407, 293, 409, 10, 27, "Text"],
+Cell[CellGroupData[{
+Cell[9841, 307, 161, 3, 50, "Code",
+ InitializationCell->False],
+Cell[10005, 312, 243, 4, 40, "Print",
+ CellTags->"Info243670310342-7727242"]
+}, Open  ]],
+Cell[10263, 319, 159, 3, 50, "Code"],
+Cell[10425, 324, 210, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[10660, 333, 359, 11, 49, "Code",
+ InitializationCell->False],
+Cell[11022, 346, 119, 2, 28, "Output"]
+}, Open  ]],
+Cell[11156, 351, 156, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[11337, 357, 227, 6, 49, "Code",
+ InitializationCell->False],
+Cell[11567, 365, 91, 1, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11707, 372, 96, 1, 35, "Subsection"],
+Cell[11806, 375, 120, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[11951, 381, 199, 5, 49, "Code",
+ InitializationCell->False],
+Cell[12153, 388, 94, 2, 31, "Output"]
+}, Open  ]],
+Cell[12262, 393, 168, 4, 26, "Text"],
+Cell[CellGroupData[{
+Cell[12455, 401, 330, 10, 49, "Code",
+ InitializationCell->False],
+Cell[12788, 413, 97, 2, 29, "Output"]
+}, Open  ]],
+Cell[12900, 418, 160, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[13085, 424, 303, 9, 49, "Code",
+ InitializationCell->False],
+Cell[13391, 435, 152, 3, 28, "Output"]
+}, Open  ]],
+Cell[13558, 441, 122, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[13705, 447, 419, 13, 49, "Code",
+ InitializationCell->False],
+Cell[14127, 462, 126, 3, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14302, 471, 102, 1, 35, "Subsection"],
+Cell[14407, 474, 202, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[14634, 483, 171, 4, 49, "Code",
+ InitializationCell->False],
+Cell[14808, 489, 126, 3, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14995, 499, 123, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[15143, 504, 144, 3, 49, "Code",
+ InitializationCell->False],
+Cell[15290, 509, 235, 4, 40, "Print",
+ CellTags->"Info303670311102-7727242"]
+}, Open  ]],
+Cell[15540, 516, 243, 5, 26, "Text"],
+Cell[15786, 523, 197, 3, 26, "Text"],
+Cell[CellGroupData[{
+Cell[16008, 530, 321, 9, 49, "Code",
+ InitializationCell->False],
+Cell[16332, 541, 117, 2, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16486, 548, 319, 9, 49, "Code",
+ InitializationCell->False],
+Cell[16808, 559, 120, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16965, 567, 347, 10, 49, "Code",
+ InitializationCell->False],
+Cell[17315, 579, 127, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17479, 587, 400, 11, 49, "Code",
+ InitializationCell->False],
+Cell[17882, 600, 92, 1, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18011, 606, 791, 24, 49, "Code",
+ InitializationCell->False],
+Cell[18805, 632, 547, 16, 31, "Output"]
+}, Open  ]],
+Cell[19367, 651, 277, 6, 26, "Text"],
+Cell[CellGroupData[{
+Cell[19669, 661, 326, 10, 49, "Code",
+ InitializationCell->False],
+Cell[19998, 673, 244, 6, 31, "Output"]
+}, Open  ]],
+Cell[20257, 682, 371, 10, 27, "Text"],
+Cell[CellGroupData[{
+Cell[20653, 696, 148, 3, 49, "Code",
+ InitializationCell->False],
+Cell[20804, 701, 274, 5, 40, "Print",
+ CellTags->"Info533670312879-7727242"]
+}, Open  ]],
+Cell[21093, 709, 211, 4, 49, "Code",
+ InitializationCell->False],
+Cell[CellGroupData[{
+Cell[21329, 717, 350, 10, 49, "Code",
+ InitializationCell->False],
+Cell[21682, 729, 422, 12, 46, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22153, 747, 103, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[22281, 752, 147, 3, 49, "Code",
+ InitializationCell->False],
+Cell[22431, 757, 238, 4, 43, "Print",
+ CellTags->"Info663670313222-7727242"]
+}, Open  ]],
+Cell[22684, 764, 323, 9, 27, "Text"],
+Cell[CellGroupData[{
+Cell[23032, 777, 160, 3, 50, "Code",
+ InitializationCell->False],
+Cell[23195, 782, 235, 4, 40, "Print",
+ CellTags->"Info653670313171-7727242"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23467, 791, 165, 3, 50, "Code",
+ InitializationCell->False],
+Cell[23635, 796, 119, 2, 21, "Print"]
+}, Open  ]],
+Cell[23769, 801, 144, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[23938, 807, 250, 6, 49, "Code",
+ InitializationCell->False],
+Cell[24191, 815, 245, 5, 28, "Output"]
+}, Open  ]],
+Cell[24451, 823, 150, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[24626, 829, 222, 5, 49, "Code",
+ InitializationCell->False],
+Cell[24851, 836, 194, 5, 28, "Output"]
+}, Open  ]],
+Cell[25060, 844, 193, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[25278, 853, 323, 9, 50, "Code",
+ InitializationCell->False],
+Cell[25604, 864, 168, 4, 29, "Output"]
+}, Open  ]],
+Cell[25787, 871, 167, 3, 26, "Text"],
+Cell[CellGroupData[{
+Cell[25979, 878, 357, 10, 49, "Code",
+ InitializationCell->False],
+Cell[26339, 890, 70, 1, 28, "Output"]
+}, Open  ]],
+Cell[26424, 894, 192, 3, 26, "Text"],
+Cell[CellGroupData[{
+Cell[26641, 901, 415, 12, 50, "Code",
+ InitializationCell->False],
+Cell[27059, 915, 70, 1, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27166, 921, 100, 1, 35, "Subsection"],
+Cell[27269, 924, 140, 2, 26, "Text"],
+Cell[CellGroupData[{
+Cell[27434, 930, 472, 14, 51, "Code",
+ InitializationCell->False],
+Cell[27909, 946, 245, 6, 29, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28203, 958, 105, 1, 35, "Subsection"],
+Cell[28311, 961, 348, 10, 27, "Text"],
+Cell[CellGroupData[{
+Cell[28684, 975, 151, 3, 50, "Code",
+ InitializationCell->False],
+Cell[28838, 980, 303, 5, 43, "Print",
+ CellTags->"Info833670313816-7727242"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29178, 990, 441, 12, 50, "Code",
+ InitializationCell->False],
+Cell[29622, 1004, 823, 23, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
